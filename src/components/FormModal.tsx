@@ -49,10 +49,10 @@ const FormModal = ({
     const size = type === "create" ? "w-8 h-8" : "w-7 h-7";
     const bgColor =
         type === "create"
-            ? "bg-lamaYellow"
+            ? "bg-Yellow1"
             : type === "update"
-              ? "bg-lamaSky"
-              : "bg-lamaPurple";
+              ? "bg-Orange1"
+              : "bg-Green1";
 
     const [open, setOpen] = useState(false);
 

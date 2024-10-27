@@ -14,7 +14,7 @@ const SingleTeacherPage = () => {
                 {/* TOP */}
                 <div className="flex flex-col lg:flex-row gap-4">
                     {/* USER INFO CARD */}
-                    <div className="bg-lamaSky py-6 px-4 rounded-md flex-1 flex gap-4">
+                    <div className="bg-Orange1 py-6 px-4 rounded-md flex-1 flex gap-4">
                         <div className="w-1/3">
                             <Image
                                 src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200"
@@ -175,19 +175,19 @@ const SingleTeacherPage = () => {
                     <h1 className="text-xl font-semibold">Shortcuts</h1>
                     <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500">
                         <Link
-                            className="p-3 rounded-md bg-lamaSkyLight"
+                            className="p-3 rounded-md bg-Orange1Light"
                             href="/"
                         >
                             Teacher&apos;s Classes
                         </Link>
                         <Link
-                            className="p-3 rounded-md bg-lamaPurpleLight"
+                            className="p-3 rounded-md bg-Green1Light"
                             href="/"
                         >
                             Teacher&apos;s Students
                         </Link>
                         <Link
-                            className="p-3 rounded-md bg-lamaYellowLight"
+                            className="p-3 rounded-md bg-Yellow1Light"
                             href="/"
                         >
                             Teacher&apos;s Lessons
@@ -196,7 +196,7 @@ const SingleTeacherPage = () => {
                             Teacher&apos;s Exams
                         </Link>
                         <Link
-                            className="p-3 rounded-md bg-lamaSkyLight"
+                            className="p-3 rounded-md bg-Orange1Light"
                             href="/"
                         >
                             Teacher&apos;s Assignments

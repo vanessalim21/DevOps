@@ -3,21 +3,21 @@ import Image from "next/image";
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 
 const data = [
-    {
-        name: "Total",
-        count: 100,
-        fill: "white",
-    },
-    {
-        name: "Girls",
-        count: 40,
-        fill: "#ffd7ba",
-    },
-    {
-        name: "Boys",
-        count: 60,
-        fill: "#ccdbfd",
-    },
+  {
+    name: "Total",
+    count: 100,
+    fill: "white",
+  },
+  {
+    name: "Girls",
+    count: 40,
+    fill: "#e6c994",
+  },
+  {
+    name: "Boys",
+    count: 60,
+    fill: "#c45335",
+  },
 ];
 
 const CountChart = () => {
@@ -45,12 +45,12 @@ const CountChart = () => {
             {/* BOTTOM */}
             <div className="flex justify-center gap-16">
                 <div className="flex flex-col gap-1">
-                    <div className="w-5 h-5 bg-lamaSky rounded-full" />
+                    <div className="w-5 h-5 bg-Orange1 rounded-full" />
                     <h1 className="font-bold">60</h1>
                     <h2 className="text-xs text-gray-400">Boys (60%)</h2>
                 </div>
                 <div className="flex flex-col gap-1">
-                    <div className="w-5 h-5 bg-lamaYellowLight rounded-full" />
+                    <div className="w-5 h-5 bg-Yellow1 rounded-full" />
                     <h1 className="font-bold">40</h1>
                     <h2 className="text-xs text-gray-400">Girls (40%)</h2>
                 </div>
