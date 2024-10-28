@@ -1,3 +1,4 @@
+import { colors } from "@mui/material";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -14,12 +15,12 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        lamaSky: "#ccdbfd",
-        lamaSkyLight: "#e0fbfc",
-        lamaPurple: "#0081a7",
-        lamaPurpleLight: "#d7e3fc",
-        lamaYellow: "#edc531",
-        lamaYellowLight: "#ffd7ba",
+        Orange1: "#c45335",
+        Orange1Light: "#cc7a3d",
+        Green1: "#008585",
+        Green1Light: "#74a892",
+        Yellow1: "#e6c994",
+        Yellow1Light: "#fbf2c4",
       },
     },
   },
