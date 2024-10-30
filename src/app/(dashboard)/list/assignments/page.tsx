@@ -110,7 +110,7 @@ const AssignmentListPage = () => {
                 data={assignmentsData}
             />
             {/* PAGINATION */}
-            <Pagination />
+            {/* <Pagination /> */}
         </div>
     );
 };

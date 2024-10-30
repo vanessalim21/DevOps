@@ -1,29 +1,32 @@
-version: '3.8'
-
+# Mendefinisikan layanan yang akan dijalankan
 services:
-  postgres:
-    image: postgres:17  # menggunakan versi terbaru
-    container_name: postgres_db
-    environment:
-      POSTGRES_USER: dev1
-      POSTGRES_PASSWORD: terserahdev
-      POSTGRES_DB: eduschool
-    ports:
-      - '5432:5432'
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    # Layanan untuk PostgreSQL
+    postgres:
+        image: postgres:17  # Menggunakan versi terbaru dari PostgreSQL
+        container_name: postgres_db  # Nama container untuk PostgreSQL
+        environment:  # Variabel lingkungan untuk konfigurasi database
+            POSTGRES_USER: dev1  # Pengguna untuk database
+            POSTGRES_PASSWORD: terserahdev  # Kata sandi untuk pengguna
+            POSTGRES_DB: eduschool  # Nama database yang akan dibuat
+        ports:
+        - '5432:5432'  # Memetakan port 5432 dari container ke host
+        volumes:
+        - postgres_data:/var/lib/postgresql/data  # Mengaitkan volume untuk penyimpanan data persisten
 
-  app:
-    build: .
-    container_name: dashboard_app
-    ports:
-      - '3000:3000'
-    environment:
-      DATABASE_URL: postgresql://dev1:terserahdev@postgres:5432/eduschool  # menggunakan nama layanan
-    depends_on:
-      - postgres
-    command: >
-      sh -c "npx prisma migrate dev --name init && npm start"
+    # Layanan untuk aplikasi
+    app:
+        build: .  # Membangun image aplikasi dari Dockerfile di direktori saat ini
+        container_name: dashboard_app  # Nama container untuk aplikasi
+        ports:
+            - '3000:3000'  # Memetakan port 3000 dari container ke host
+        environment:  # Variabel lingkungan untuk konfigurasi aplikasi
+            DATABASE_URL: postgresql://dev1:terserahdev@postgres:5432/eduschool  # URL koneksi ke database PostgreSQL
+        depends_on:  # Menentukan urutan startup layanan
+            - postgres  # Aplikasi bergantung pada layanan PostgreSQL
+        command: >  # Perintah yang dijalankan saat container aplikasi dimulai, Menjalankan migrasi Prisma dan kemudian memulai aplikasi
+            sh -c "npx prisma migrate dev --name init && npm start"
+            
 
+# Mendefinisikan volume untuk penyimpanan data
 volumes:
-  postgres_data:
+    postgres_data:  # Nama volume untuk data PostgreSQL

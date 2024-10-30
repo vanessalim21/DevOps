@@ -101,7 +101,7 @@ const AnnouncementListPage = () => {
                 data={announcementsData}
             />
             {/* PAGINATION */}
-            <Pagination />
+            {/* <Pagination /> */}
         </div>
     );
 };
