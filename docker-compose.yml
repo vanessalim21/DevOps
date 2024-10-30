@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17  # menggunakan versi terbaru
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: dev1
+      POSTGRES_PASSWORD: terserahdev
+      POSTGRES_DB: eduschool
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: dashboard_app
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: postgresql://dev1:terserahdev@postgres:5432/eduschool  # menggunakan nama layanan
+    depends_on:
+      - postgres
+    command: >
+      sh -c "npx prisma migrate dev --name init && npm start"
+
+volumes:
+  postgres_data:
