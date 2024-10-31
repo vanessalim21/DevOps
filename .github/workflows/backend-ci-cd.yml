@@ -26,13 +26,3 @@ jobs:
 
       - name: Build project
         run: npm run build
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to Production Server
-        env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        run: |
-          ssh -i $DEPLOY_KEY user@yourserver "cd /path/to/project && git pull origin backend && npm install && npm run build"
