@@ -31,7 +31,6 @@ const FormModal = ({
     table:
         | "teacher"
         | "student"
-        | "parent"
         | "subject"
         | "class"
         | "lesson"

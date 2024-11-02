@@ -9,7 +9,7 @@ services:
             POSTGRES_PASSWORD: terserahdev  # Kata sandi untuk pengguna
             POSTGRES_DB: eduschool  # Nama database yang akan dibuat
         ports:
-        - '5432:5432'  # Memetakan port 5432 dari container ke host
+        - '5433:5432'  # Memetakan port 5433 dari host ke port 5432 di container
         volumes:
         - postgres_data:/var/lib/postgresql/data  # Mengaitkan volume untuk penyimpanan data persisten
 
@@ -18,7 +18,7 @@ services:
         build: .  # Membangun image aplikasi dari Dockerfile di direktori saat ini
         container_name: dashboard_app  # Nama container untuk aplikasi
         ports:
-            - '3000:3000'  # Memetakan port 3000 dari container ke host
+            - '4000:3000'  # Mengubah port host ke 4000 dan tetap memetakan ke port 3000 di container
         environment:  # Variabel lingkungan untuk konfigurasi aplikasi
             DATABASE_URL: postgresql://dev1:terserahdev@postgres:5432/eduschool  # URL koneksi ke database PostgreSQL
         depends_on:  # Menentukan urutan startup layanan
@@ -26,7 +26,6 @@ services:
         command: >  # Perintah yang dijalankan saat container aplikasi dimulai, Menjalankan migrasi Prisma dan kemudian memulai aplikasi
             sh -c "npx prisma migrate dev --name init && npm start"
             
-
 # Mendefinisikan volume untuk penyimpanan data
 volumes:
     postgres_data:  # Nama volume untuk data PostgreSQL
