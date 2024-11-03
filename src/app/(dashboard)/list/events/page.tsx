@@ -2,9 +2,9 @@ import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import { role } from "@/lib/data";
 import prisma from "@/lib/prisma";
 import { item_per_page } from "@/lib/settings";
+import { currentUserId, role } from "@/lib/utils";
 import { Class, Event, Prisma } from "@prisma/client";
 import Image from "next/image";
 
@@ -34,10 +34,14 @@ const columns = [
         accessor: "endTime",
         className: "hidden md:table-cell",
     },
-    {
-        header: "Actions",
-        accessor: "action",
-    },
+    ...(role === "admin"
+        ? [
+            {
+            header: "Actions",
+            accessor: "action",
+            },
+        ]
+        : []),
 ];
 
 const renderRow = (item: EventList) => (
@@ -101,6 +105,19 @@ const EventListPage = async ({
             }
         }
     }
+
+    //role conditions
+    const roleConditions = {
+        teacher: { lessons: { some: { teacherId: currentUserId! } } },
+        student: { students: { some: { id: currentUserId! } } },
+    };
+
+    query.OR = [
+        { classId: null },
+        {
+          class: roleConditions[role as keyof typeof roleConditions] || {},
+        },
+    ];
 
     const [data, count] = await prisma.$transaction([
         prisma.event.findMany({

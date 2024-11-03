@@ -2,9 +2,9 @@ import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import { role, studentsData } from "@/lib/data";
 import prisma from "@/lib/prisma";
 import { item_per_page } from "@/lib/settings";
+import { role } from "@/lib/utils";
 import { Class, Prisma, Student } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,34 +12,38 @@ import Link from "next/link";
 type StudentList = Student & { class: Class };
 
 const columns = [
-  {
-    header: "Info",
-    accessor: "info",
-  },
-  {
-    header: "Student ID",
-    accessor: "studentId",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Grade",
-    accessor: "grade",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Phone",
-    accessor: "phone",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Address",
-    accessor: "address",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
+    {
+        header: "Info",
+        accessor: "info",
+    },
+    {
+        header: "Student ID",
+        accessor: "studentId",
+        className: "hidden md:table-cell",
+    },
+    {
+        header: "Grade",
+        accessor: "grade",
+        className: "hidden md:table-cell",
+    },
+    {
+        header: "Phone",
+        accessor: "phone",
+        className: "hidden lg:table-cell",
+    },
+    {
+        header: "Address",
+        accessor: "address",
+        className: "hidden lg:table-cell",
+    },
+    ...(role === "admin"
+        ? [
+            {
+                header: "Actions",
+                accessor: "action",
+            },
+            ]
+        : []),
 ];
 
 const renderRow = (item: StudentList) => (
