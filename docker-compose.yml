@@ -19,11 +19,11 @@ services:
         container_name: dashboard_app  # Nama container untuk aplikasi
         ports:
             - '4000:3000'  # Mengubah port host ke 4000 dan tetap memetakan ke port 3000 di container
-        environment:  # Variabel lingkungan untuk konfigurasi aplikasi
-            DATABASE_URL: postgresql://dev1:terserahdev@postgres:5432/eduschool  # URL koneksi ke database PostgreSQL
+        env_file:
+            - .env  # Menyertakan file .env yang berisi variabel lingkungan
         depends_on:  # Menentukan urutan startup layanan
             - postgres  # Aplikasi bergantung pada layanan PostgreSQL
-        command: >  # Perintah yang dijalankan saat container aplikasi dimulai, Menjalankan migrasi Prisma dan kemudian memulai aplikasi
+        command: >  # Perintah yang dijalankan saat container aplikasi dimulai, menjalankan migrasi Prisma dan kemudian memulai aplikasi
             sh -c "npx prisma migrate dev --name init && npm start"
             
 # Mendefinisikan volume untuk penyimpanan data

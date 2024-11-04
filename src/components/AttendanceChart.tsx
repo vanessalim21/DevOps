@@ -11,87 +11,45 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
-const data = [
-    {
-        name: "Mon",
-        present: 90,
-        absent: 10,
-    },
-    {
-        name: "Tue",
-        present: 80,
-        absent: 20,
-    },
-    {
-        name: "Wed",
-        present: 50,
-        absent: 50,
-    },
-    {
-        name: "Thu",
-        present: 90,
-        absent: 10,
-    },
-    {
-        name: "Fri",
-        present: 60,
-        absent: 40,
-    },
-];
 
-const AttendanceChart = () => {
+const AttendanceChart = ({
+    data,
+}: {
+    data: { name: string; present: number; absent: number }[];
+}) => {
     return (
-      <div className="bg-white rounded-lg p-4 h-full">
-        <div className="flex justify-between items-center">
-          <h1 className="text-lg font-semibold">Attendance</h1>
-        </div>
         <ResponsiveContainer width="100%" height="90%">
-          <BarChart width={500} height={300} data={data} barSize={20}>
-            <CartesianGrid
-              strokeDasharray="3 3"
-              vertical={false}
-              stroke="#ddd"
-            />
-            <XAxis
-              dataKey="name"
-              axisLine={false}
-              tick={{ fill: "#313628" }}
-              tickLine={false}
-            />
-            <YAxis
-              axisLine={false}
-              tick={{ fill: "#313628" }}
-              tickLine={false}
-            />
-            <Tooltip
-              contentStyle={{
-                borderRadius: "10px",
-                borderColor: "lightgray",
-              }}
-            />
-            <Legend
-              align="left"
-              verticalAlign="top"
-              wrapperStyle={{
-                paddingTop: "20px",
-                paddingBottom: "40px",
-              }}
-            />
-            <Bar
-              dataKey="present"
-              fill="#cc7a3d"
-              legendType="circle"
-              radius={[10, 10, 0, 0]}
-            />
-            <Bar
-              dataKey="absent"
-              fill="#fbf2c4"
-              legendType="circle"
-              radius={[10, 10, 0, 0]}
-            />
-          </BarChart>
+            <BarChart width={500} height={300} data={data} barSize={20}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ddd" />
+                <XAxis
+                    dataKey="name"
+                    axisLine={false}
+                    tick={{ fill: "#313628" }}
+                    tickLine={false}
+                />
+                <YAxis axisLine={false} tick={{ fill: "#313628" }} tickLine={false} />
+                <Tooltip
+                    contentStyle={{ borderRadius: "10px", borderColor: "lightgray" }}
+                />
+                <Legend
+                    align="left"
+                    verticalAlign="top"
+                    wrapperStyle={{ paddingTop: "20px", paddingBottom: "40px" }}
+                />
+                <Bar
+                    dataKey="present"
+                    fill="#cc7a3d"
+                    legendType="circle"
+                    radius={[10, 10, 0, 0]}
+                />
+                <Bar
+                    dataKey="absent"
+                    fill="#fbf2c4"
+                    legendType="circle"
+                    radius={[10, 10, 0, 0]}
+                />
+            </BarChart>
         </ResponsiveContainer>
-      </div>
     );
 };
 
