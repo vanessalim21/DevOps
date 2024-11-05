@@ -1,0 +1,65 @@
+import { auth } from "@clerk/nextjs/server";
+import prisma from "@/lib/prisma";
+import FormModal from "./FormModal";
+
+export type FormContainerProps = {
+    table:
+      | "teacher"
+      | "student"
+      | "subject"
+      | "class"
+      | "lesson"
+      | "exam"
+      | "assignment"
+      | "result"
+      | "attendance"
+      | "event"
+      | "announcement";
+    type: "create" | "update" | "delete";
+    data?: any;
+    id?: number | string;
+};
+
+const FormContainer = async ({ table, type, data, id }: FormContainerProps) => {
+
+    let relatedData = {};
+    // const { userId, sessionClaims } = await auth();
+    // const role = (sessionClaims?.metadata as { role?: string })?.role;
+    // const currentUserId = userId;
+
+    if (type !== "delete") {
+        switch (table) {
+            case "subject":
+                const subjectTeachers = await prisma.teacher.findMany({
+                    select: { id: true, name: true, surname: true },
+                });
+                relatedData = { teachers: subjectTeachers };
+                break;
+            case "class":
+                const classGrades = await prisma.grade.findMany({
+                    select: { id: true, level: true },
+                });
+                const classTeachers = await prisma.teacher.findMany({
+                    select: { id: true, name: true, surname: true },
+                });
+                relatedData = { teachers: classTeachers, grades: classGrades };
+                break;
+            default:
+                break;
+        }
+    }
+
+    return (
+        <div className="">
+            <FormModal
+                table={table}
+                type={type}
+                data={data}
+                id={id}
+                relatedData={relatedData}
+            />
+        </div>
+    );
+};
+
+export default FormContainer;
