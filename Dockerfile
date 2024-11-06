@@ -13,6 +13,9 @@ RUN npm ci
 # Salin semua file dari project ke direktori kerja di container
 COPY . .
 
+# Generate Database
+#RUN npx prisma migrate dev --name init
+
 # Jalankan Build aplikasi Next.js
 RUN npm run build
 

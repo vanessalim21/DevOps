@@ -13,13 +13,12 @@ const LoginPage = () => {
     const router = useRouter();
 
     useEffect(() => {
-      if (isLoaded && isSignedIn) {
-        const role = user?.publicMetadata.role;
-        if (role) {
-          router.push(`/${role}`);
-        }
-      }
-    }, [isLoaded, isSignedIn, user, router]);
+		const role = user?.publicMetadata.role;
+
+		if (role) {
+			router.push(`/${role}`);
+		}
+    }, [user, router]);
 
 	return (
 		<div className="h-screen flex items-center justify-center bg-Orange1Light">
