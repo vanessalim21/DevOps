@@ -11,7 +11,12 @@ const StudentPage = async () => {
             students: { some: { id: userId! } },
         },
     });
+
     //console.log(classItem);
+    if (classItem.length === 0) {
+      // Handle the case where there are no classes found for the user
+      return <div>No classes found for this student.</div>;
+    }
     return (
         <div className="p-4 flex gap-4 flex-col xl:flex-row">
             {/* LEFT */}

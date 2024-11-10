@@ -14,7 +14,8 @@ RUN npm ci
 COPY . .
 
 # Generate Database
-#RUN npx prisma migrate dev --name init
+# RUN npx prisma migrate dev --name init
+# Menjalankan migrasi secara manual setelah container school_dashboard_app berjalan
 
 # Jalankan Build aplikasi Next.js
 RUN npm run build

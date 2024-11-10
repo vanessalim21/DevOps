@@ -11,18 +11,18 @@ services:
         ports:
             - '5432:5432'  # Memetakan port 5432 dari host ke port 5432 di container
         volumes:
-            - postgres_data:/var/lib/postgresql/data  # Mengaitkan volume untuk penyimpanan data persisten
+            - postgres_data:/var/lib/postgresql/data  # Mengaitkan volume untuk menyimpan data agar tetap ada saat container berhenti atau dihapus.
 
     # Layanan untuk aplikasi
     app:
         build: .  # Membangun image aplikasi dari Dockerfile di direktori saat ini
-        container_name: s_dashboard_app  # Nama container untuk aplikasi
+        container_name: school_dashboard_app  # Nama container untuk aplikasi
         ports:
             - '3000:3000'  # Mengubah port host ke 3000 dan tetap memetakan ke port 3000 di container
         environment:
-            DATABASE_URL: "postgresql://dev1:terserahdev@postgres:5432/eduschool"  # Menggunakan nama layanan
+            DATABASE_URL: postgresql://dev1:terserahdev@localhost:5432/eduschool  # Menggunakan nama layanan
         depends_on:  # Menentukan urutan startup layanan
-            - postgres  # Aplikasi bergantung pada layanan PostgreSQL
+            - postgres
 
 # Mendefinisikan volume untuk penyimpanan data
 volumes:
