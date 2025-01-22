@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: eduschool-app # Name of the container
-          image: vanessaelim/eduschool:latest # Docker image for the application
+          image: vanessaelim/devops:latest # Docker image for the application
           ports:
             - containerPort: 3000 # Port exposed by the container
           env:
