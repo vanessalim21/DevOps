@@ -1,0 +1,37 @@
+# Deployment configuration for the Eduschool application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eduschool-app # Name of the deployment
+spec:
+  replicas: 1 # Number of replicas to create
+  selector:
+    matchLabels:
+      app: eduschool-app # Must match the pod label
+  template:
+    metadata:
+      labels:
+        app: eduschool-app # Label for the pod
+    spec:
+      containers:
+        - name: eduschool-app # Name of the container
+          image: vanessaelim/eduschool:latest # Docker image for the application
+          ports:
+            - containerPort: 3000 # Port exposed by the container
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://dev1:terserahdev@postgres:5432/eduschool" # Database connection string
+---
+# Service configuration for exposing the Eduschool application
+apiVersion: v1
+kind: Service
+metadata:
+  name: eduschool-service # Name of the service
+spec:
+  selector:
+    app: eduschool-app # Must match the pod label
+  ports:
+    - protocol: TCP
+      port: 80 # Port exposed by the service
+      targetPort: 3000 # Port to route traffic to in the container
+  type: NodePort # Expose the service externally

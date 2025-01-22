@@ -13,6 +13,11 @@ RUN npm install
 # Salin semua file dari project ke direktori kerja di container
 COPY . .
 
+# Generate Database
+# RUN npx prisma migrate dev --name init
+
+# RUN npx prisma db seed
+
 # Jalankan Build aplikasi Next.js
 RUN npm run build
 

@@ -3,7 +3,7 @@ services:
     # Layanan untuk PostgreSQL
     postgres:
         image: postgres:17  # Menggunakan versi terbaru dari PostgreSQL
-        container_name: postgres_db  # Nama container untuk PostgreSQL
+        container_name: postgres-db  # Nama container untuk PostgreSQL
         environment:  # Variabel lingkungan untuk konfigurasi database
             POSTGRES_USER: dev1  # Pengguna untuk database
             POSTGRES_PASSWORD: terserahdev  # Kata sandi untuk pengguna
@@ -16,15 +16,13 @@ services:
     # Layanan untuk aplikasi
     app:
         build: .  # Membangun image aplikasi dari Dockerfile di direktori saat ini
-        container_name: dashboard_app  # Nama container untuk aplikasi
+        container_name: eduschool_app  # Nama container untuk aplikasi
         ports:
             - '3000:3000'  # Memetakan port 3000 dari container ke host
         environment:  # Variabel lingkungan untuk konfigurasi aplikasi
             DATABASE_URL: postgresql://dev1:terserahdev@postgres:5432/eduschool  # URL koneksi ke database PostgreSQL
         depends_on:  # Menentukan urutan startup layanan
             - postgres  # Aplikasi bergantung pada layanan PostgreSQL
-        command: >  # Perintah yang dijalankan saat container aplikasi dimulai, Menjalankan migrasi Prisma dan kemudian memulai aplikasi
-            sh -c "npx prisma migrate dev --name init && npm start"
             
 
 # Mendefinisikan volume untuk penyimpanan data

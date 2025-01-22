@@ -42,12 +42,12 @@ const menuItems = [
                 href: "/list/lessons",
                 visible: ["admin", "teacher"],
             },
-            {
-                icon: "/exam.png",
-                label: "Exams",
-                href: "/list/exams",
-                visible: ["admin", "teacher", "student"],
-            },
+            // {
+            //     icon: "/exam.png",
+            //     label: "Exams",
+            //     href: "/list/exams",
+            //     visible: ["admin", "teacher", "student"],
+            // },
             {
                 icon: "/assignment.png",
                 label: "Assignments",

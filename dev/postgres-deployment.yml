@@ -1,0 +1,41 @@
+# Deployment configuration for PostgreSQL database
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eduschool-postgres # Name of the deployment
+spec:
+  replicas: 1 # Number of replicas to create
+  selector:
+    matchLabels:
+      app: eduschool-postgres # Must match the pod label
+  template:
+    metadata:
+      labels:
+        app: eduschool-postgres # Label for the pod
+    spec:
+      containers:
+        - name: eduschool-postgres # Name of the container
+          image: postgres:17 # Docker image for PostgreSQL
+          ports:
+            - containerPort: 5432 # Port exposed by PostgreSQL
+          env:
+            - name: POSTGRES_USER
+              value: "dev1" # PostgreSQL username
+            - name: POSTGRES_PASSWORD
+              value: "terserahdev" # PostgreSQL password
+            - name: POSTGRES_DB
+              value: "eduschool" # Name of the database
+---
+# Service configuration for exposing the PostgreSQL database
+apiVersion: v1
+kind: Service
+metadata:
+  name: eduschool-postgres-service # Name of the service
+spec:
+  selector:
+    app: eduschool-postgres # Must match the pod label
+  ports:
+    - protocol: TCP
+      port: 5432 # Port exposed by the service
+      targetPort: 5432 # Port to route traffic to in the container
+  clusterIP: None # Headless service to enable direct pod-to-pod communication
